@@ -1,6 +1,7 @@
 package com.raspbian.service;
 
 import com.raspbian.model.RegisterRequest;
+import com.raspbian.model.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class RootServerService {
+
+    public static final String SERVER_REGISTER_CONTEXT_PATH = "/server/register";
 
     @Value("${remote.server.address}")
     String serverUrl;
@@ -22,9 +25,9 @@ public class RootServerService {
                 .companyName(companyName)
                 .clientVersion(clientVersion)
                 .clientDescription(clientDescription)
-                .status("ONLINE")
+                .status(Status.ONLINE.getStatus())
                 .build();
-        return restTemplate.postForEntity(serverUrl + "/server/register", request, String.class);
+        return restTemplate.postForEntity(serverUrl + SERVER_REGISTER_CONTEXT_PATH, request, String.class);
     }
 
 }

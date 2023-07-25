@@ -49,12 +49,12 @@ public class RegisterController {
 
         if (response.getStatusCode().value() == 200) {
             if (response.getBody().contains("error")) {
-                return getClientId() + " registering failed with message: " + response.getBody();
+                return getClientId() + " registering failed with message: " + response.getBody().replace("error", "");
             } else {
                 return getClientId() + " registered in remote system: " + getRemoteSystem();
             }
         } else {
-            return getClientId() + " failed to registere in remote system: " + getRemoteSystem() + ". Please contact system administrator.";
+            return getClientId() + " failed to registere in remote system: " + getRemoteSystem() + ". Please contact system administrator...";
         }
     }
 
