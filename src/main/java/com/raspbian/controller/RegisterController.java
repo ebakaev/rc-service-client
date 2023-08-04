@@ -3,6 +3,7 @@ package com.raspbian.controller;
 import com.raspbian.service.RootServerService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ public class RegisterController {
     @Value("${remote.server.address}")
     String remoteSystem;
 
+    @ToString.Exclude
     @Autowired
     RootServerService serverService;
 
@@ -57,5 +59,4 @@ public class RegisterController {
             return getClientId() + " failed to registere in remote system: " + getRemoteSystem() + ". Please contact system administrator...";
         }
     }
-
 }
